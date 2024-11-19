@@ -33,7 +33,6 @@ def llistar_directori(p_str_path:str) -> list:
     """Llistar el contingut d’un directori"""
     # Obtenir la ruta absoluta del directori
     _str_path = to_ruta_absoluta(p_str_path)
-    print(_str_path)
     # Comprovar si la ruta és un directori
     if es_dir(_str_path):
         # Llistar el contingut del directori

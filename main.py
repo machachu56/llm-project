@@ -30,12 +30,15 @@ table_exists = utilsLLM.table_exists(utilsLLM.cur, taula)
 if not table_exists:
     AFEGIR = True
 
+if(utils.es_dir(DATA) == False):
+    print("No s'ha trobat el directori de dades, es crea ara...")
+    utils.crear_dir(DATA)
+    
 
 original_tmpDir = tmpDir
 for i in llistar:
     extensio = utils.llegirExtensio(i)
     tmpDir = original_tmpDir + "-" + extensio.replace(".", "")  + "/"
-    print(tmpDir)
     # Segons la extensió fer una cosa o una altre
     if extensio == ".xlsx":
         utils.crear_dir(tmpDir)
@@ -50,6 +53,7 @@ for i in llistar:
 
     shutil.rmtree(tmpDir, ignore_errors=False, onerror=None)
 if(llistar == []):
+    print("No s'ha trobat cap arxiu a llegir, posa els fitxer a la carpeta de dades.\nEs proceedeix a la lectura de les dades guardades a la taula especificada de la base de dades")
     knowledge_base = utilsLLM.agentBase(OLLAMABASE, taula)
 
 agent = Agent(

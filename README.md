@@ -1,5 +1,4 @@
-Crear carpeta 'data' i posar els documents .xlsx (Excel).
-
+Programa per fer consultes as documents, de moment es poden fer servir documents .xlsx i .pdf
 
 # Com utilitzar
 
