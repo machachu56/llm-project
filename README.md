@@ -9,7 +9,7 @@ Instal·lar requisits:
 Cal baixar postgresql si es vol utilitzar una BBDD local.
 `https://www.postgresql.org/download/`
 
-Caldrà canviar la `db_url` per la que utilitzi postgresql a l'arxiu main.py.
+Caldrà canviar la `db_url` per la que utilitzi postgresql a l'arxiu main.py (Cal canviar el host, l'usuari, contrasenya, port, etc).
 
 Per afegir noves dades a la BBDD, cal descomentar la línia: `knowledge_base.load(upsert=True)`
 
