@@ -1,5 +1,5 @@
 Versió en català del README aqui.
-[a CATALÀ](https://github.com/machachu56/llm-project/README_CAT.md)
+[CATALÀ](https://github.com/machachu56/llm-project/blob/main/README_CAT.md)
 
 Program to do queries to documents using a LLM, only .PDFs and .XLSX are supported at the moment.
 
