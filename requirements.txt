@@ -2,4 +2,7 @@ pandas==1.5.3
 phidata==2.5.32
 psycopg2
 psycopg[binary]
+pgvector
 ollama
+sqlalchemy
+openpyxl
