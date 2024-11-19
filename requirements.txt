@@ -1,4 +1,4 @@
-pandas==1.5.3
+pandas
 phidata==2.5.32
 psycopg2
 psycopg[binary]
@@ -7,4 +7,3 @@ ollama
 sqlalchemy
 openpyxl
 pypdf
-shutil

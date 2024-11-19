@@ -1,5 +1,5 @@
 {
-    "ollama-base": "http://127.0.0.1:11434",
+    "ollama-base": "https://3d17-34-87-126-232.ngrok-free.app/",
     "postgres-table": "pdfs",
     "data-dir": "data",
     "tmp-base-folder": "tmp",
