@@ -44,7 +44,6 @@ def treureExtensio(arxiu:str) -> str:
     return Path(arxiu).stem
 
 def convertirAJson(directori:str, tmpDir) -> None:
-    print(llistar_directori(directori))
     crear_dir(tmpDir)
     for i in llistar_directori(directori):
         print(i)
