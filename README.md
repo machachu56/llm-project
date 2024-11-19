@@ -1,27 +1,30 @@
-Programa per fer consultes as documents, de moment es poden fer servir documents .xlsx i .pdf
+Versió en català del README aqui.
+[a CATALÀ](https://github.com/machachu56/llm-project/README_CAT.md)
 
-# Com utilitzar
+Program to do queries to documents using a LLM, only .PDFs and .XLSX are supported at the moment.
 
-Instal·lar requisits:
+# Usage
+
+Install requirements:
 `pip install -r requirements.txt`
 
-Cal baixar PostgreSQL + una extensió si es vol utilitzar una BBDD local. Es pot fer amb docker molt fàcilment.
+PostgreSQL + an extension is required. This can be easily done with Docker.
 
-**Hi ha un script a la carpeta scripts/ que permet instal·lar un postgresql molt ràpidament amb la extensió necessaria.**
-**Després es pot gestionar fàcilment amb pgAdmin https://www.pgadmin.org/**
-**Canviar la contrasenya del postgres editant el script per més seguretat.**
+**There's a script in the scripts/ folder that allows installing a postgresql server with the extension very easily.**
+**Afterwards, it can be managed with pgAdmin https://www.pgadmin.org/**
+**Changing the password of the postgresql script is recommended for more security.**
 
-Crear un usuari a postgres amb contrasenya i una nova base de dades amb un nom com cal.
+Create a username in postgres with a password and a new database, you can use pgAdmin to do so.
 
-Modificar l'arxiu `settings.json` per establir diferents configuracions del programa:
-- `ollama-base` IP i PORT on OLLAMA està fent-se servir
-- `postgres-table` taula de la BD on es guardarà la informació, canviar al nom que vulguis, la taula tindrà aquest nom.
-- `data-dir` carpeta on posar les dades, de moment només soporta .xlsx i .pdf
-- `tmp-base-folder` opcional: carpeta base dels arxius temporals quan es processin.
-- `db-connection`  connexió postgres en format `postgresql://USUARI:CONTRASENYA@IP:PORT/NOM_BASE_DADES` 
+Modify the `settings.json` file to set different program settings:
+- `ollama-base` IP and PORT where OLLAMA is running.
+- `postgres-table` DB table where the information will be saved, change to the name you want, the table will have this name.
+- `data-dir` Folder to put the data in, at the moment it only supports .xlsx and .pdf
+- `tmp-base-folder` (optional) base folder for temporary files when processed.
+- `db-connection` postgres connection in the format `postgresql://USER:PASSWORD@IP:PORT/NAME_DATABASE`
 
 # Ollama
 
-Utilitzar les comandes `ollama pull llama3.1` i `ollama pull nomic-embed-text` assegurar-se que després de fer això ollama s'executa amb `ollama serve`.
+Use the commands `ollama pull llama3.1` and `ollama pull nomic-embed-text` and make sure that after doing this ollama is running with `ollama serve`.
 
-Programa WIP: Es millorarà en els pròxims dies.
+WIP program: It will be improved in the coming days.
