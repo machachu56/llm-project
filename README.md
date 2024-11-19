@@ -5,8 +5,9 @@ Programa per fer consultes as documents, de moment es poden fer servir documents
 Instal·lar requisits:
 `pip install -r requirements.txt`
 
-Cal baixar postgresql si es vol utilitzar una BBDD local.
-`https://www.postgresql.org/download/`
+Cal baixar PostgreSQL + una extensió si es vol utilitzar una BBDD local. Es pot fer amb docker molt fàcilment.
+**Hi ha un script a la carpeta scripts/ que permet instal·lar un postgresql molt ràpidament amb la extensió necessaria.**
+**Després es pot gestionar fàcilment amb pgAdmin https://www.pgadmin.org/**
 
 Crear un usuari a postgres amb contrasenya i una nova base de dades amb un nom com cal.
 
