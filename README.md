@@ -3,7 +3,7 @@ Crear carpeta 'data' i posar els documents .xlsx (Excel).
 
 # Com utilitzar
 
-Instal·lar requisits - WIP - Crear llista requisits.
+Instal·lar requisits:
 `pip install -r requirements.txt`
 
 Cal baixar postgresql si es vol utilitzar una BBDD local.
