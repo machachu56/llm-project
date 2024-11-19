@@ -1,40 +1,59 @@
 from phi.model.ollama import Ollama
 from phi.agent import Agent
-from phi.vectordb.pgvector import PgVector
-from phi.knowledge.json import JSONKnowledgeBase
 import parser.utils.utils as utils
-from phi.embedder.ollama import OllamaEmbedder
-import os
+import parser.utils.utilsLlm as utilsLLM
 import shutil
 
-dataExcel = "data/"
 
-tmpDir = "tmp/"
+#Directori de dades (modificar settings.json)
+DATA = utils.readJson("data-dir") + "/"
 
-ollamaBase = "http://127.0.0.1:11434"
+AFEGIR = False
 
-utils.convertirAJson(dataExcel, tmpDir)
+#Directori temporal (modificar settings.json)
+tmpDir = utils.readJson("tmp-base-folder")
 
-# Create a knowledge base from the vector store
-knowledge_base= JSONKnowledgeBase(
-    path=tmpDir,    
-    vector_db=PgVector(
-        db_url="postgresql://phidata:xtwe4DHB2ib8dY79NgXF@localhost:5432/phidata-knowledge",
-        table_name="json-docs",
+#Connexió base de dades (modificar settings.json)
+OLLAMABASE = utils.readJson("ollama-base")
 
-        embedder=OllamaEmbedder(host=ollamaBase, model="nomic-embed-text", dimensions=768),
-    ),
-)
+# Llegir taula de la base de dades
+taula = utils.readJson("postgres-table")
 
-# DESCOMENTAR SI ES VOLEN CARREGAR ELS ARXIUS DE tmp/ A LA BASE DE CONEIXEMENT
+taula = taula + "-docs"
 
-#knowledge_base.load(upsert=True)
+llistar = utils.llistar_directori(DATA)
 
-shutil.rmtree(tmpDir)
+knowledge_base = None
+
+table_exists = utilsLLM.table_exists(utilsLLM.cur, taula)
+
+if not table_exists:
+    AFEGIR = True
+
+
+original_tmpDir = tmpDir
+for i in llistar:
+    extensio = utils.llegirExtensio(i)
+    tmpDir = original_tmpDir + "-" + extensio.replace(".", "")  + "/"
+    print(tmpDir)
+    # Segons la extensió fer una cosa o una altre
+    if extensio == ".xlsx":
+        utils.crear_dir(tmpDir)
+        knowledge_base = utilsLLM.excelMemoria(DATA + i, tmpDir, OLLAMABASE, taula=taula, afegir=AFEGIR)
+        
+    elif extensio == ".pdf":
+        utils.crear_dir(tmpDir)
+        shutil.copy(DATA + i, tmpDir + "-" + extensio)
+        knowledge_base = utilsLLM.pdfMemoria(tmpDir, OLLAMABASE, taula=taula, afegir=AFEGIR)
+    else:
+        print("No s'ha pogut llegir l'extensió o no és compatible.")
+
+    shutil.rmtree(tmpDir, ignore_errors=False, onerror=None)
+if(llistar == []):
+    knowledge_base = utilsLLM.agentBase(OLLAMABASE, taula)
 
 agent = Agent(
-    model=Ollama(host=ollamaBase, id="llama3.1"),
-    # Add the knowledge base to the agent
+    model=Ollama(host=OLLAMABASE, id="llama3.1"),
     show_tool_calls=True,
     markdown=True,
     knowledge_base=knowledge_base,
@@ -42,4 +61,4 @@ agent = Agent(
     add_references_to_prompt=True,
 )
 
-agent.print_response("Retrieve the auto avaluation grades & co-avaluation (if existent) tell me the teacher comments if they did put a comment. Keep in mind that the grades were put by students, there might be a teacher comment, but it's not for certain in all comments.", stream=True)
+agent.print_response(input("Introdueix el que es vol preguntar a l'IA: "), stream=True)

@@ -1,6 +1,7 @@
 import pandas as pd
 import os
 from pathlib import Path
+import json
 
 #Funcions utils del Xavi
 def to_ruta_absoluta(p_str_path:str) -> str:
@@ -13,6 +14,13 @@ def to_ruta_absoluta(p_str_path:str) -> str:
     else:
         # Converteix la ruta relativa a una ruta absoluta
         return os.path.abspath(_str_path)
+
+
+def readJson(info):
+    with open('settings.json', 'r') as f:
+        file = json.load(f)
+        data = file[info]
+    return data
 
 def es_dir(p_str_path:str) -> bool:
     """Detectar l'existència d'un directori o carpeta"""
@@ -43,11 +51,11 @@ def crear_dir(p_str_path_dir:str):
 def treureExtensio(arxiu:str) -> str:
     return Path(arxiu).stem
 
-def convertirAJson(directori:str, tmpDir) -> None:
-    crear_dir(tmpDir)
-    for i in llistar_directori(directori):
-        print(i)
-        arxiu = ''.join(directori + i)
-        llegirExcel = pd.read_excel(arxiu)
-        llegirExcel.to_json(tmpDir + treureExtensio(arxiu) + ".json")
+def llegirExtensio(llistar:list) -> str:
+    suffix = os.path.splitext(llistar)[1]
+    return suffix
+
+def convertirExcelAJson(arxiu:str, tmpDir) -> None:
+    llegirExcel = pd.read_excel(arxiu)
+    llegirExcel.to_json(tmpDir + treureExtensio(arxiu) + ".json")
     

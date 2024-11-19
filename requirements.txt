@@ -6,3 +6,5 @@ pgvector
 ollama
 sqlalchemy
 openpyxl
+pypdf
+shutil

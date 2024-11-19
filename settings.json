@@ -1,0 +1,7 @@
+{
+    "ollama-base": "http://127.0.0.1:11434",
+    "postgres-table": "pdfs",
+    "data-dir": "data",
+    "tmp-base-folder": "tmp",
+    "db-connection": "postgresql://phidata:xtwe4DHB2ib8dY79NgXF@localhost:5432/phidata-knowledge"
+}
